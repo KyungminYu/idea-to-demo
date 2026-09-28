@@ -7,7 +7,7 @@
 # The URL is only needed the first time; it's saved as the "template" remote.
 set -euo pipefail
 
-TEMPLATE_OWNED=(workflow AGENTS.md CLAUDE.md .claude/commands scripts)
+TEMPLATE_OWNED=(workflow roles AGENTS.md CLAUDE.md .claude .codex scripts)
 
 url="${1:-}"
 branch="${2:-main}"

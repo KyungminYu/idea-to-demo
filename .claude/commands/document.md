@@ -3,7 +3,7 @@ description: Step 5 · Write README, architecture, pitch, demo script and build 
 argument-hint: [notes]
 ---
 
-Run step 5 of the pipeline described in `AGENTS.md`.
-Follow `workflow/05-document.md` exactly, including the rules for every step.
+You are the coordinator. Run step 5 as described in `AGENTS.md` ("How the coordinator runs a step"), handing work to the roles listed for it.
+The step is defined in `workflow/05-document.md`.
 
 Extra input from the user: $ARGUMENTS

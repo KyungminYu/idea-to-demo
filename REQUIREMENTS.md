@@ -10,6 +10,7 @@ Drop raw material (hackathon brief, PDFs, screenshots, sample data) into `inputs
 - Purpose: <!-- hackathon / portfolio / prototype -->
 - Time budget: <!-- e.g. 24 hours, 2 weekends -->
 - Deliverables: <!-- repo, deployed URL, demo video, slides -->
+- Review loop: on <!-- "off" skips the reviewer agent to save time and tokens -->
 
 ## 1. Task
 

@@ -21,6 +21,20 @@ English: [README.md](README.md)
 `/next`는 현재 단계를 승인하고 다음 단계를 실행합니다. `/status`는 현재 위치를 보여줍니다.
 진행 상태와 에이전트가 내린 결정은 모두 `PROGRESS.md`에 기록됩니다.
 
+## 에이전트 팀
+
+각 단계는 서브에이전트 팀이 진행하고, 결과가 사람에게 오기 전에 리뷰를 거칩니다.
+
+| 역할 | 쓰는 파일 | 단계 |
+|---|---|---|
+| **조율자 (coordinator)**: 메인 세션 | `PROGRESS.md` | 전체: 일을 나눠 맡기고, 리뷰를 돌리고, 사람에게 보고 |
+| **디자이너 (designer)** | `specs/`, `reference/`, `docs/` | 0~3단계, 5단계 문서 |
+| **개발자 (developer)** | `app/` | 1단계 뼈대, 2단계 스텁, 4단계 구현, 5단계 `app/README.md` |
+| **리뷰어 (reviewer)** | 없음 (읽기 전용) | 모든 단계 끝에 검토, 수정은 최대 2회 |
+
+**Claude Code와 Codex 모두에서** 동작합니다. 역할은 `roles/*.md`에 한 번만 쓰고, `scripts/sync-agents.sh`가 여기서 `.claude/agents/*.md`와 `.codex/agents/*.toml`을 만듭니다. 서브에이전트가 없는 도구는 한 세션 안에서 역할 파일을 바꿔 읽으며 같은 흐름으로 진행합니다.
+시간이나 토큰을 아끼려면 `REQUIREMENTS.md`에서 `Review loop: off`로 설정하세요.
+
 ## 시작하기
 
 1. 이 템플릿으로 **새 레포**를 만듭니다. 템플릿 자체에는 절대 채우지 않습니다. 여기서는 파이프라인이 실행을 거부합니다.
@@ -52,9 +66,9 @@ English: [README.md](README.md)
 
 | 템플릿이 관리 (프로젝트에서 수정 금지) | 프로젝트가 관리 |
 |---|---|
-| `workflow/`, `AGENTS.md`, `CLAUDE.md`, `.claude/commands/`, `scripts/` | `REQUIREMENTS.md`, `inputs/`, `PROGRESS.md`, `specs/`, `reference/`, `app/`, `docs/`, `README*.md` |
+| `workflow/`, `roles/`, `AGENTS.md`, `CLAUDE.md`, `.claude/`, `.codex/`, `scripts/` | `REQUIREMENTS.md`, `inputs/`, `PROGRESS.md`, `specs/`, `reference/`, `app/`, `docs/`, `README*.md` |
 
-- **workflow 개선**: 프로젝트가 아니라 이 템플릿 레포에서 고칩니다.
+- **workflow 개선**: 프로젝트가 아니라 이 템플릿 레포에서 고칩니다. `roles/`를 고쳤다면 `scripts/sync-agents.sh`를 실행하고 생성된 파일도 함께 커밋합니다.
 - **진행 중인 프로젝트에 최신 workflow 반영**: 프로젝트 폴더에서 실행합니다. 템플릿이 관리하는 파일만 덮어씁니다. URL은 처음 한 번만 필요합니다.
 
   ```bash

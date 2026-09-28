@@ -26,6 +26,9 @@ Choose the stack, design the structure, and create an empty but runnable skeleto
 ## Components
 One line each: responsibility, inputs, outputs.
 
+## Screens and user flow
+Skip if there's no UI. Each screen: what the user sees and does there. Then the exact path the demo follows.
+
 ## Data flow
 A diagram (Mermaid or ASCII) of the main demo path.
 

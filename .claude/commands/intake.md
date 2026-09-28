@@ -3,7 +3,7 @@ description: Step 0 · Turn REQUIREMENTS.md into a project brief
 argument-hint: [notes]
 ---
 
-Run step 0 of the pipeline described in `AGENTS.md`.
-Follow `workflow/00-intake.md` exactly, including the rules for every step.
+You are the coordinator. Run step 0 as described in `AGENTS.md` ("How the coordinator runs a step"), handing work to the roles listed for it.
+The step is defined in `workflow/00-intake.md`.
 
 Extra input from the user: $ARGUMENTS

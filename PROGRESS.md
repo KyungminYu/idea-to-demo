@@ -24,3 +24,10 @@ Every step appends the decisions it made and the assumptions it had to take.
 
 | Step | Decision | Why |
 |---|---|---|
+
+## Review log
+
+One row per review round.
+
+| Step | Round | Verdict | Blockers / majors | Left open |
+|---|---|---|---|---|

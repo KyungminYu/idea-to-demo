@@ -3,7 +3,7 @@ description: Step 2 · Pin framework docs and define data model, API contracts a
 argument-hint: [notes]
 ---
 
-Run step 2 of the pipeline described in `AGENTS.md`.
-Follow `workflow/02-define-api.md` exactly, including the rules for every step.
+You are the coordinator. Run step 2 as described in `AGENTS.md` ("How the coordinator runs a step"), handing work to the roles listed for it.
+The step is defined in `workflow/02-define-api.md`.
 
 Extra input from the user: $ARGUMENTS

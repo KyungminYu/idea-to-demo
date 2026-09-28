@@ -21,6 +21,20 @@ You fill in **one file**, `REQUIREMENTS.md`. The agent then designs the structur
 `/next` approves the current step and runs the next one. `/status` shows where you are.
 Progress and every decision the agent makes are tracked in `PROGRESS.md`.
 
+## Agent team
+
+Each step is run by a small team of subagents, with a review loop before you see the result.
+
+| Role | Writes | Steps |
+|---|---|---|
+| **coordinator** (your main session) | `PROGRESS.md` | all: hands out tasks, runs the review loop, reports to you |
+| **designer** | `specs/`, `reference/`, `docs/` | 0–3, docs in 5 |
+| **developer** | `app/` | scaffold in 1, stubs in 2, build in 4, `app/README.md` in 5 |
+| **reviewer** | nothing (read-only) | after every step; up to 2 fix rounds |
+
+Works in both **Claude Code** and **Codex**. The roles are written once in `roles/*.md`, and `scripts/sync-agents.sh` generates `.claude/agents/*.md` and `.codex/agents/*.toml` from them. Tools without subagents follow the same flow in one session, switching roles by reading the role files.
+To save time or tokens, set `Review loop: off` in `REQUIREMENTS.md`.
+
 ## Quick start
 
 1. Create a **new repo** from this template. Never fill in the template itself; the pipeline refuses to run here.
@@ -54,9 +68,9 @@ Files are split by owner:
 
 | Template-owned (don't edit in a project) | Project-owned |
 |---|---|
-| `workflow/`, `AGENTS.md`, `CLAUDE.md`, `.claude/commands/`, `scripts/` | `REQUIREMENTS.md`, `inputs/`, `PROGRESS.md`, `specs/`, `reference/`, `app/`, `docs/`, `README*.md` |
+| `workflow/`, `roles/`, `AGENTS.md`, `CLAUDE.md`, `.claude/`, `.codex/`, `scripts/` | `REQUIREMENTS.md`, `inputs/`, `PROGRESS.md`, `specs/`, `reference/`, `app/`, `docs/`, `README*.md` |
 
-- **Improving the workflow:** make the change in this template repo, not in a project.
+- **Improving the workflow:** make the change in this template repo, not in a project. After editing `roles/`, run `scripts/sync-agents.sh` and commit the generated files too.
 - **Getting the latest workflow into an existing project:** run this from the project. It only overwrites template-owned files. The URL is needed the first time only.
 
   ```bash
@@ -74,8 +88,11 @@ inputs/             your raw material
 PROGRESS.md         step status, milestones, decision log
 AGENTS.md           rules every agent follows (CLAUDE.md imports it)
 workflow/           exact instructions for each step
-.claude/commands/   slash commands that run those steps
-scripts/            template guard and workflow updater
+roles/              designer, developer, reviewer (source of truth)
+.claude/agents/     generated Claude Code subagents
+.codex/agents/      generated Codex subagents
+.claude/commands/   slash commands that run the steps
+scripts/            template guard, workflow updater, agent sync
 specs/              design outputs of steps 0–3
 reference/          official framework and API docs, fetched in step 2
 app/                generated code and tests
