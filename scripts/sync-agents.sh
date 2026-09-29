@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# Generates tool-specific subagent files from the single source in roles/*.md:
-#   .claude/agents/<name>.md    (Claude Code)
-#   .codex/agents/<name>.toml   (Codex)
-# Run it after editing anything in roles/.
+# Generates tool-specific files from single sources:
+#   roles/*.md             -> .claude/agents/<name>.md    (Claude Code subagents)
+#                          -> .codex/agents/<name>.toml   (Codex subagents)
+#   .claude/commands/*.md  -> .agents/skills/<name>/SKILL.md (Codex skills)
+# Run it after editing anything in roles/ or .claude/commands/.
 #
 # Role file format: frontmatter with name, description, sandbox (read-only |
 # workspace-write) and claude_tools, followed by the instructions as Markdown.
@@ -73,4 +74,27 @@ for src in roles/*.md; do
   } > ".codex/agents/$name.toml"
 
   echo "synced $name"
+done
+
+# Codex has no project slash commands; it uses skills in .agents/skills/.
+# Each .claude/commands/<name>.md becomes .agents/skills/<name>/SKILL.md,
+# invoked in Codex with $<name> (e.g. $intake, $next).
+rm -rf .agents/skills
+mkdir -p .agents/skills
+for src in .claude/commands/*.md; do
+  name="$(basename "$src" .md)"
+  description="$(field "$src" description)"
+  instructions="$(body "$src" | sed 's/\$ARGUMENTS/anything the user wrote along with this request/g')"
+  mkdir -p ".agents/skills/$name"
+  {
+    echo "---"
+    echo "name: $name"
+    echo "description: $description"
+    echo "---"
+    echo
+    echo "<!-- Generated from $src by scripts/sync-agents.sh. Edit that file, not this one. -->"
+    echo
+    echo "$instructions"
+  } > ".agents/skills/$name/SKILL.md"
+  echo "synced skill $name"
 done

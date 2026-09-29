@@ -1,0 +1,18 @@
+# Project settings for Codex. Codex loads this file only when you trust the project.
+# Everything here exists so the pipeline can run without manual toggling:
+# the researcher queries paper APIs from the shell, and the reviewer re-opens every cited paper.
+
+# Fetch live pages instead of the pre-indexed cache, so papers can be opened and verified.
+web_search = "live"
+
+# Agents write inside the project only.
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+# Shell access to arXiv, Semantic Scholar, OpenAlex and package registries.
+network_access = true
+
+[agents]
+enabled = true
+# Step 5 may run developers in parallel.
+max_concurrent_threads_per_session = 4

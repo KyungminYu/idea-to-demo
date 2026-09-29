@@ -29,7 +29,11 @@ The human writes `REQUIREMENTS.md`. A small team of agents does everything else,
 | **developer** | `roles/developer.md` | Scaffold, stubs, implementation, tests, `app/README.md`. |
 | **reviewer** | `roles/reviewer.md` | Read-only review with a PASS / CHANGES_REQUESTED verdict. |
 
-`roles/` is the source. `scripts/sync-agents.sh` turns it into `.claude/agents/*.md` (Claude Code) and `.codex/agents/*.toml` (Codex).
+`roles/` is the source. `scripts/sync-agents.sh` turns it into `.claude/agents/*.md` (Claude Code) and `.codex/agents/*.toml` (Codex), and turns `.claude/commands/*.md` into Codex skills in `.agents/skills/`.
+
+**Delegation is required, not optional.** Whenever this file says to hand work to a role, spawn that role's subagent by its name (`researcher`, `designer`, `developer`, `reviewer`):
+- Claude Code: use the Agent tool with that subagent type.
+- Codex: spawn the custom agent of that name from `.codex/agents/`, wait for it to finish, then continue. Project settings in `.codex/config.toml` give agents live web search and network access for paper and doc lookups.
 
 ## Pipeline
 
@@ -43,7 +47,7 @@ The human writes `REQUIREMENTS.md`. A small team of agents does everything else,
 | 5 | Build (one milestone per run) | `workflow/05-build.md` | developer | correctness, contracts, method fidelity, tests, demo check |
 | 6 | Documentation | `workflow/06-document.md` | designer (docs/) + developer (app/README.md) | commands work, evidence trace matches code |
 
-If your tool has no slash commands, the human will say "run step N" or "next". Treat that exactly like the matching command.
+Claude Code runs steps with slash commands (`/intake`, `/next`, …). Codex runs the same steps as skills (`$intake`, `$next`, …). In any other tool, the human will say "run step N" or "next"; treat that exactly like the matching command.
 
 ## How the coordinator runs a step
 

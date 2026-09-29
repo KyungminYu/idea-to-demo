@@ -69,7 +69,19 @@ English: [README.md](README.md)
 
 5. 6단계가 끝날 때까지 `/next`를 반복합니다. 단계마다 커밋하는 걸 권장합니다.
 
-다른 에이전트(Codex, Cursor 등)는 `AGENTS.md`를 읽습니다. "run step 0", 그다음 "next"라고 말하면 됩니다.
+### Codex에서
+
+흐름은 같고, 슬래시 명령어 대신 스킬로 실행합니다.
+
+1. 프로젝트를 열고 Codex가 물어보면 **신뢰(trust)** 를 선택합니다. 신뢰한 프로젝트에서만 `.codex/config.toml`과 `.codex/agents/`의 커스텀 에이전트를 읽습니다.
+2. `$intake`를 실행하고, 이후 단계는 `$next`로 넘어갑니다. `/skills`로 전체 목록을 볼 수 있습니다.
+
+`.codex/config.toml`이 파이프라인에 필요한 설정을 켜 두므로 따로 손댈 것이 없습니다. 논문을 열어 검증하기 위한 실시간 웹 검색, 논문 API와 패키지 설치를 위한 샌드박스 네트워크 접근, 최대 4개까지 병렬로 도는 서브에이전트가 켜집니다. 명령 실행 승인은 사용자의 Codex 설정을 그대로 따릅니다.
+Codex 앱에서 논문 사이트에 접속이 안 되면 논문 조사 단계는 Codex CLI로 실행하세요. 앱이 설정의 `network_access`를 반영하지 않는 문제가 보고된 적이 있습니다([openai/codex#13373](https://github.com/openai/codex/issues/13373)). 이 경우에도 리뷰어는 검증되지 않은 논문을 통과시키지 않고 단계를 멈춥니다.
+
+### 그 밖의 도구
+
+서브에이전트나 스킬이 없는 도구는 `AGENTS.md`를 읽습니다. "run step 0", 그다음 "next"라고 말하면 한 세션이 역할 파일을 바꿔 가며 진행합니다.
 
 ## 여러 프로젝트에서 쓰는 법
 
@@ -77,9 +89,9 @@ English: [README.md](README.md)
 
 | 템플릿이 관리 (프로젝트에서 수정 금지) | 프로젝트가 관리 |
 |---|---|
-| `workflow/`, `roles/`, `AGENTS.md`, `CLAUDE.md`, `.claude/`, `.codex/`, `scripts/` | `REQUIREMENTS.md`, `inputs/`, `PROGRESS.md`, `specs/`, `reference/`, `app/`, `docs/`, `README*.md` |
+| `workflow/`, `roles/`, `AGENTS.md`, `CLAUDE.md`, `.claude/`, `.codex/`, `.agents/`, `scripts/` | `REQUIREMENTS.md`, `inputs/`, `PROGRESS.md`, `specs/`, `reference/`, `app/`, `docs/`, `README*.md` |
 
-- **workflow 개선**: 프로젝트가 아니라 이 템플릿 레포에서 고칩니다. `roles/`를 고쳤다면 `scripts/sync-agents.sh`를 실행하고 생성된 파일도 함께 커밋합니다.
+- **workflow 개선**: 프로젝트가 아니라 이 템플릿 레포에서 고칩니다. `roles/`나 `.claude/commands/`를 고쳤다면 `scripts/sync-agents.sh`를 실행하고 생성된 파일도 함께 커밋합니다.
 - **진행 중인 프로젝트에 최신 workflow 반영**: 프로젝트 폴더에서 실행합니다. 템플릿이 관리하는 파일만 덮어씁니다. URL은 처음 한 번만 필요합니다.
 
   ```bash

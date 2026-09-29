@@ -69,7 +69,19 @@ To save time or tokens, set `Review loop: off` in `REQUIREMENTS.md`. `Research:`
 
 5. Repeat `/next` until step 6 is done. Commit after each step.
 
-Using another agent (Codex, Cursor, …)? It reads `AGENTS.md`. Say "run step 0", then "next".
+### In Codex
+
+Everything runs the same way; the steps are skills instead of slash commands.
+
+1. Open the project and **trust it** when Codex asks. Codex only loads `.codex/config.toml` and the custom agents in `.codex/agents/` for trusted projects.
+2. Run `$intake`, then `$next` for each following step. `/skills` lists them all.
+
+`.codex/config.toml` turns on what the pipeline needs, so nothing has to be toggled by hand: live web search (to open and verify papers), network access in the workspace sandbox (for paper APIs and package installs), and subagents with up to 4 in parallel. Command approvals follow your own Codex settings.
+If papers can't be reached in the Codex app, use the Codex CLI for the research step; the app has had an issue honoring `network_access` from config ([openai/codex#13373](https://github.com/openai/codex/issues/13373)). The reviewer then blocks the step rather than passing unverified papers.
+
+### In other tools
+
+Tools without subagents or skills read `AGENTS.md`. Say "run step 0", then "next"; one session switches between the role files.
 
 ## Using it across many projects
 
@@ -79,9 +91,9 @@ Files are split by owner:
 
 | Template-owned (don't edit in a project) | Project-owned |
 |---|---|
-| `workflow/`, `roles/`, `AGENTS.md`, `CLAUDE.md`, `.claude/`, `.codex/`, `scripts/` | `REQUIREMENTS.md`, `inputs/`, `PROGRESS.md`, `specs/`, `reference/`, `app/`, `docs/`, `README*.md` |
+| `workflow/`, `roles/`, `AGENTS.md`, `CLAUDE.md`, `.claude/`, `.codex/`, `.agents/`, `scripts/` | `REQUIREMENTS.md`, `inputs/`, `PROGRESS.md`, `specs/`, `reference/`, `app/`, `docs/`, `README*.md` |
 
-- **Improving the workflow:** make the change in this template repo, not in a project. After editing `roles/`, run `scripts/sync-agents.sh` and commit the generated files too.
+- **Improving the workflow:** make the change in this template repo, not in a project. After editing `roles/` or `.claude/commands/`, run `scripts/sync-agents.sh` and commit the generated files too.
 - **Getting the latest workflow into an existing project:** run this from the project. It only overwrites template-owned files. The URL is needed the first time only.
 
   ```bash
@@ -101,8 +113,10 @@ AGENTS.md           rules every agent follows (CLAUDE.md imports it)
 workflow/           exact instructions for each step
 roles/              researcher, designer, developer, reviewer (source of truth)
 .claude/agents/     generated Claude Code subagents
+.claude/commands/   slash commands that run the steps (source for Codex skills)
 .codex/agents/      generated Codex subagents
-.claude/commands/   slash commands that run the steps
+.codex/config.toml  Codex project settings: live web search, network, subagents
+.agents/skills/     generated Codex skills ($intake, $next, …)
 scripts/            template guard, workflow updater, agent sync
 specs/              research and design outputs of steps 0–4
 reference/papers/   verified paper notes, written in step 1

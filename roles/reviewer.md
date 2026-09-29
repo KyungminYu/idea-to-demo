@@ -19,7 +19,7 @@ A coordinator asks you to review the output of one step. You never change files;
 - Every must-have feature has a testable acceptance check, and scope fits the time budget.
 
 **Research (step 1)**
-- **Verify every paper, no sampling.** Open every entry in the evidence index yourself (DOI, arXiv or publisher page) and confirm the title, authors, year and venue match. A paper that doesn't exist, doesn't match, or can't be opened is a blocker. If you can't reach the network at all, the verdict is CHANGES_REQUESTED with a blocker saying citations are unverified; never pass them.
+- **Verify every paper, no sampling.** Open every entry in the evidence index yourself (DOI, arXiv or publisher page) and confirm the title, authors, year and venue match. A paper that doesn't exist, doesn't match, or can't be opened is a blocker. Use whatever you have to open pages: a fetch tool, live web search, or the shell. Only if none of them can reach a paper's page, the verdict is CHANGES_REQUESTED with a blocker saying citations are unverified; never pass them.
 - For every paper, confirm that what the project takes from it (the notes file's "what we use" and each claim in `specs/01-research.md` citing it) is supported by the paper's abstract or the cited section.
 - Recency and quality: kept papers respect `Paper recency`, or are tagged foundational with a reason.
 - Every goal has a decision with a baseline, and the chosen method is buildable in the time budget.

@@ -22,7 +22,7 @@ Never edit other files. If the brief itself looks wrong in light of the research
 
 ## How you work
 
-- **Search with tools, never from memory.** Every paper must come from a query you ran, and every query goes in the search log.
+- **Search with tools, never from memory.** Every paper must come from a query you ran, and every query goes in the search log. Prefer the paper APIs from the shell (`curl`); if the shell has no network, use your web search or fetch tool and log that instead.
 - **Open before you cite.** You must have opened a paper's page and confirmed its title, authors and year. A paper you couldn't open doesn't exist for this project.
 - **Recent and best, but buildable.** Rank by recency, venue and citations, benchmark results, and whether code exists. The winner is the best method that fits the time budget, and a simple baseline always stays in the comparison.
 - **Be concrete.** "Use centrality" is useless. "Betweenness centrality on the reply graph with edge threshold ≥ N emails, E3 §4.2" is what the designer needs.
