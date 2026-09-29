@@ -2,7 +2,7 @@
 
 This is the only file you have to fill in. Everything else is generated step by step.
 Leave a section blank if you don't know yet; step 0 (`/intake`) will ask you about it.
-Drop raw material (hackathon brief, PDFs, screenshots, sample data) into `inputs/` and mention it below.
+Drop raw material (hackathon brief, PDFs, screenshots, sample data, papers you already know about) into `inputs/` and mention it below.
 
 ## Settings
 
@@ -11,6 +11,8 @@ Drop raw material (hackathon brief, PDFs, screenshots, sample data) into `inputs
 - Time budget: <!-- e.g. 24 hours, 2 weekends -->
 - Deliverables: <!-- repo, deployed URL, demo video, slides -->
 - Review loop: on <!-- "off" skips the reviewer agent to save time and tokens -->
+- Research: methods <!-- methods: papers back algorithms, metrics, models, evaluation · all: also architecture and tooling · off: skip -->
+- Paper recency: 3 years <!-- older papers only as tagged "foundational" -->
 
 ## 1. Task
 

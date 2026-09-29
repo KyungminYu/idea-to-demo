@@ -1,4 +1,4 @@
-# Step 5 · Documentation
+# Step 6 · Documentation
 
 Write what a judge, reviewer or recruiter needs. Describe what was actually built, not what was planned.
 
@@ -14,20 +14,28 @@ Write what a judge, reviewer or recruiter needs. Describe what was actually buil
 Install, configure (every env var), run, test, and seed demo data. Commands must be copy-pasteable and verified.
 
 ### `docs/architecture.md`
-Final stack, component diagram, data flow, key decisions from the decision log, and known limitations.
+Final stack, component diagram, data flow, key decisions from the decision log, the research-backed methods each component uses, and known limitations.
 
 ### `docs/pitch.md`
 A 3-minute pitch:
 1. Hook (15s): the problem in one sentence, with a number if possible.
 2. Who hurts (30s): the user and today's workaround.
 3. Demo (90s): points to the demo script.
-4. How it works (30s): one diagram.
+4. How it works (30s): one diagram, and the one or two papers the core method stands on ("built on <method> from <venue year>").
 5. What's next (15s).
 Then a table of likely judge questions with answers.
 
 ### `docs/demo-script.md`
 | # | Action | What to say | Fallback if it breaks |
 Follows the must-have acceptance checks from the brief.
+
+### `docs/technical-video-script.md`
+A 3–5 minute walkthrough for technical judges: the problem, the research behind each core method (what the papers showed, what was chosen and why), the architecture, a code tour of where each method lives, and the results against the baseline.
+
+### `docs/evidence-trace.md`
+One table that follows each decision from evidence to running code:
+| Goal | Evidence (ID, paper, section) | Design (spec section) | Interface | Code (file:function) | Test |
+Check every row against the code; a method that was planned but not built is listed as "not built".
 
 ### `docs/build-log.md`
 How the project was made with this workflow: the requirements, each step's key decisions (from the decision log), where the human intervened, and what changed after review. This is the portfolio story.

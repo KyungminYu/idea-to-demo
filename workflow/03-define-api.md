@@ -1,4 +1,4 @@
-# Step 2 · Framework & API definition
+# Step 3 · Framework & API definition
 
 Pin down every interface before writing logic: the external libraries and APIs you depend on, and the contracts inside the app.
 
@@ -18,10 +18,11 @@ Pin down every interface before writing logic: the external libraries and APIs y
    - HTTP API → `specs/api/openapi.yaml` (OpenAPI 3.1)
    - events or messages → a schema per message
    - modules → a typed function signature per public function
+   Functions that implement a research method document the method, its parameters and default values, and the evidence ID, e.g. `key_person_risk(graph, threshold=10)  # E3 §4.2`.
 7. Generate typed stubs in `app/` from the contracts: models or types, route handlers and service functions with correct signatures that return a clear "not implemented" error. The app must still start.
-8. Add one contract test per endpoint or public function that asserts the shape, and mark it expected-to-fail or skipped until step 4.
+8. Add one contract test per endpoint or public function that asserts the shape, and mark it expected-to-fail or skipped until step 5.
 
-## Output: `specs/02-interfaces.md`
+## Output: `specs/03-interfaces.md`
 
 ```markdown
 # Interfaces
@@ -36,11 +37,11 @@ Exact calls with signatures, auth, limits, gotchas.
 Tables or types, plus a Mermaid ER diagram if there's more than two entities.
 
 ## Internal API
-Summary table of every endpoint or function: name, input, output, errors, and which must-have feature it serves.
+Summary table of every endpoint or function: name, input, output, errors, which must-have feature it serves, and evidence IDs where a research method is involved.
 Full contract in `specs/api/`.
 
 ## Traceability
-| Must-have feature (from brief) | Interfaces it needs |
+| Must-have feature (from brief) | Research goal / evidence | Interfaces it needs |
 ```
 
 ## Done when
